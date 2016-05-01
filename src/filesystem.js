@@ -2,6 +2,11 @@
 
 const fs = require('fs');
 const os = require('os');
+const _ = require('lodash');
+
+const filterFiles = (files) => {
+    return _.filter(files,(file) => file.endsWith('.extrategy'));
+};
 
 const list = () => {
     return new Promise((resolve, reject) => {
@@ -9,7 +14,7 @@ const list = () => {
             if(err){
                 reject(err)
             }else{
-                resolve(files);
+                resolve(filterFiles(files));
             }
         });
     });
