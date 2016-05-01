@@ -1,25 +1,31 @@
 'use strict';
 
+const path = require('path');
 const fs = require('fs');
 const os = require('os');
-const _ = require('lodash');
-
-const filterFiles = (files) => {
-    return _.filter(files,(file) => file.endsWith('.extrategy'));
-};
+const workPath = path.join(os.homedir(),'extrategy-electron');
 
 const list = () => {
     return new Promise((resolve, reject) => {
-        fs.readdir(os.homedir(),(err,files)=>{
+        fs.readdir(workPath,(err,files)=>{
             if(err){
                 reject(err)
             }else{
-                resolve(filterFiles(files));
+                resolve(files);
             }
         });
     });
 };
 
+const init = () => {
+    return new Promise((resolve, reject) => {
+        fs.mkdir(workPath, () => {
+            resolve();
+        });
+    });
+};
+
 module.exports = {
+    init:init,
     list:list
 };
