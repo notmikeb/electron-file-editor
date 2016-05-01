@@ -1,0 +1,26 @@
+{
+    "name": "electron-file-editor",
+    "version": "1.0.0",
+    "description": "A simple file editor made with Electron",
+    "main": "main.js",
+    "scripts": {
+        "prestart": "npm install",
+        "start": "electron ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/e-xtrategy/electron-file-editor.git"
+    },
+    "keywords": [
+        "electron"
+    ],
+    "author": "e-xtrategy",
+    "license": "WTFPL",
+    "bugs": {
+        "url": "https://github.com/e-xtrategy/electron-file-editor/issues"
+    },
+    "homepage": "https://github.com/e-xtrategy/electron-file-editor#readme",
+    "devDependencies": {
+        "electron-prebuilt": "^0.37.8"
+    }
+}
