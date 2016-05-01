@@ -24,6 +24,7 @@
     "electron-prebuilt": "0.37.8"
   },
   "dependencies": {
-    "bootstrap": "3.3.6"
+    "bootstrap": "3.3.6",
+    "lodash": "4.11.1"
   }
 }
