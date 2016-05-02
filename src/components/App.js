@@ -7,7 +7,7 @@ export default class App extends React.Component {
         <div>
             <AppBar
               title="electron-file-editor"
-              zDepth={1}/>
+              showMenuIconButton={false}/>
         </div>
       );
   }
