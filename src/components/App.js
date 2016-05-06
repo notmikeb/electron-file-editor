@@ -17,8 +17,8 @@ export default class App extends React.Component {
               title="electron-file-editor"
               showMenuIconButton={false}/>
           <FloatingActionButton style={style}>
-               <ContentAdd />
-             </FloatingActionButton>
+              <ContentAdd />
+          </FloatingActionButton>
         </div>
       );
   }
