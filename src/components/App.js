@@ -2,15 +2,11 @@ import AppBar from 'material-ui/AppBar';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import {List, ListItem} from 'material-ui/List';
-import DeleteIcon from 'material-ui/svg-icons/action/delete';
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import React from 'react';
 import Files from '../model/Files';
 
-const style = {
-    position: "fixed",
-    bottom: "20px",
-    right: "20px"
-};
+import FileList from './FileList';
 
 export default class App extends React.Component {
     constructor(props) {
@@ -28,27 +24,17 @@ export default class App extends React.Component {
         });
     }
 
-    onDeleteClick(index){
-        alert(index);
+    onDeleteClick(file){
+        Files.remove(file).then((files) => {
+            this.setState({
+                files:files
+            })
+        });
     };
 
-    onListClick(file){
+    onItemClick(file){
         alert(file);
     };
-
-    printFiles(){
-        let files = this.state.files;
-        return files.map((file,index) => {
-            let deleteIcon = (<DeleteIcon onClick={this.onDeleteClick.bind(this,index)} />);
-            return (
-                <ListItem
-                    key={index}
-                    onClick={this.onListClick.bind(this,file)}
-                    primaryText={file}
-                    rightIcon={deleteIcon} />
-            );
-        });
-    }
 
     render() {
         return (
@@ -56,12 +42,9 @@ export default class App extends React.Component {
                 <AppBar
                     title="electron-file-editor"
                     showMenuIconButton={false}/>
-                <FloatingActionButton style={style}>
-                    <ContentAdd />
-                </FloatingActionButton>
-                <List>
-                    {this.printFiles()}
-                </List>
+                <FileList
+                    onClick={this.onItemClick}
+                    files={this.state.files}/>
             </div>
         );
     }
