@@ -7,12 +7,14 @@ import React from 'react';
 import Files from '../model/Files';
 
 import FileList from './FileList';
+import Editor from './Editor';
 
 export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            files:[]
+            files:[],
+            selectedFile:null
         };
     }
 
@@ -36,15 +38,42 @@ export default class App extends React.Component {
         alert(file);
     };
 
+    onNewItem(){
+        this.setState(Object.assign(this.state,{
+            selectedFile:{
+                name:"",
+                content:""
+            }
+        }));
+    }
+
+    onSaveItem(file){
+        alert(file);
+    }
+
     render() {
+
+        let currentPage;
+        if(!this.state.selectedFile){
+            currentPage = (
+                <FileList
+                    onNewItemClick={() => {this.onNewItem()}}
+                    onClick={this.onItemClick}
+                    files={this.state.files}/>
+            );
+        }else{
+            currentPage = (
+                <Editor
+                    onSaveItem={() => {this.onSaveItem()}}/>
+            );
+        }
+
         return (
             <div>
                 <AppBar
                     title="electron-file-editor"
                     showMenuIconButton={false}/>
-                <FileList
-                    onClick={this.onItemClick}
-                    files={this.state.files}/>
+                {currentPage}
             </div>
         );
     }

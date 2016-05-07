@@ -28,7 +28,7 @@ export default class FileList extends React.Component {
     render() {
         return (
             <div>
-                <FloatingActionButton style={style}>
+                <FloatingActionButton onClick={() => this.props.onNewItemClick()} style={style}>
                     <ContentAdd />
                 </FloatingActionButton>
                 <List>
