@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "A simple file editor made with Electron",
   "main": "main.js",
-  "scripts": {
+  "scripts":{
+    "postinstall": "cd legacy && javac Time.java",
     "prestart": "npm install",
     "start": "electron ."
   },
