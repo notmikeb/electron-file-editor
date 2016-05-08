@@ -4,7 +4,7 @@
   "description": "A simple file editor made with Electron",
   "main": "main.js",
   "scripts":{
-    "postinstall": "cd legacy && javac Time.java",
+    "postinstall": "javac legacy/BuildTime.java",
     "prestart": "npm install",
     "start": "electron ."
   },
@@ -32,6 +32,7 @@
     "material-ui": "0.15.0",
     "react": "15.0.2",
     "react-dom": "15.0.2",
-    "react-tap-event-plugin": "1.0.0"
+    "react-tap-event-plugin": "1.0.0",
+    "shelljs": "0.7.0"
   }
 }
