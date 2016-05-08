@@ -26,16 +26,24 @@ export default class App extends React.Component {
         });
     }
 
-    onDeleteClick(file){
+    onDeleteItem(file){
         Files.remove(file).then((files) => {
             this.setState({
-                files:files
+                files:files,
+                selectedFile: null
             })
         });
     };
 
-    onItemClick(file){
-        alert(file);
+    onItemClick(filename){
+        Files.getContent(filename).then((content) => {
+            this.setState(Object.assign(this.state,{
+                selectedFile:{
+                    name:filename,
+                    content:content
+                }
+            }));
+        });
     };
 
     onNewItem(){
@@ -48,23 +56,31 @@ export default class App extends React.Component {
     }
 
     onSaveItem(file){
-        alert(file);
+        Files.save(file.name,file.content).then((files) => {
+            this.setState({
+                files:files,
+                selectedFile: null
+            })
+        });
     }
 
     render() {
 
         let currentPage;
+
         if(!this.state.selectedFile){
             currentPage = (
                 <FileList
-                    onNewItemClick={() => {this.onNewItem()}}
-                    onClick={this.onItemClick}
+                    onNewItemClick={this.onNewItem.bind(this)}
+                    onClick={this.onItemClick.bind(this)}
                     files={this.state.files}/>
             );
         }else{
             currentPage = (
                 <Editor
-                    onSaveItem={() => {this.onSaveItem()}}/>
+                    file={this.state.selectedFile}
+                    onDeleteItem={this.onDeleteItem.bind(this)}
+                    onSaveItem={this.onSaveItem.bind(this)}/>
             );
         }
 
