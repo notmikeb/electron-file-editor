@@ -4,7 +4,9 @@ import ContentAdd from 'material-ui/svg-icons/content/add';
 import {List, ListItem} from 'material-ui/List';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import React from 'react';
+
 import Files from '../model/Files';
+import BuildNumber from '../model/BuildNumber';
 
 import FileList from './FileList';
 import Editor from './Editor';
@@ -14,15 +16,22 @@ export default class App extends React.Component {
         super(props);
         this.state = {
             files:[],
-            selectedFile:null
+            selectedFile:null,
+            buildTime:""
         };
     }
 
     componentDidMount() {
         Files.list().then((files) => {
-            this.setState({
+            this.setState(Object.assign(this.state,{
                 files:files
-            })
+            }));
+        });
+
+        BuildNumber.get().then((buildTime) => {
+            this.setState(Object.assign(this.state,{
+                buildTime:buildTime
+            }));
         });
     }
 
@@ -87,7 +96,7 @@ export default class App extends React.Component {
         return (
             <div>
                 <AppBar
-                    title="electron-file-editor"
+                    title={'electron-file-editor - ' + this.state.buildTime}
                     showMenuIconButton={false}/>
                 {currentPage}
             </div>
