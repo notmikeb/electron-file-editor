@@ -33,6 +33,6 @@ app.post('/files/:name', function (req, res) {
 
 Files.init().then(() => {
     app.listen(3000, () => {
-        console.log('Example app listening on port 3000!');
+        console.log('Server running on port 3000');
     });
 });
