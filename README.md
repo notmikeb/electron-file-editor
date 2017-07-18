@@ -1,11 +1,11 @@
 # electron-file-editor
 A simple file editor made with Electron
 
-##Start
+## Start
 
     npm start
 
-##Build
+## Build
 
     npm run build
 
